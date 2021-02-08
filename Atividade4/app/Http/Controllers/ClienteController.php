@@ -12,9 +12,7 @@ class ClienteController extends Controller{
        return view('cliente.index', compact(['cliente']));
     }
 
-    public function create(){
-        return view('cliente.create');
-    }
+    public function create(){ }
 
     public function store(Request $request){
         $cliente = new Cliente();
@@ -23,22 +21,20 @@ class ClienteController extends Controller{
         $cliente -> email = $request -> input('email');
         $cliente -> save();
 
-        return redirect()->route('cliente.index');
+        return json_encode($cliente);
     }
 
     public function show($id){
         $cliente = Cliente::find($id);
 
-        return view('cliente.show')->with('cliente', $cliente);
-    }
-
-    public function edit($id){
-        $cliente = Cliente::find($id);
-
         if(isset($cliente)){
-            return view('cliente.edit', compact('cliente'));
+            return json_encode($cliente);
         }
+
+        return response("Cliente não encontrado!", 404);
     }
+
+    public function edit($id){    }
 
     public function update(Request $request, $id){
         $cliente = Cliente::find($id);
@@ -48,15 +44,20 @@ class ClienteController extends Controller{
             $cliente -> telefone = $request -> input('telefone');
             $cliente -> email = $request -> input('email');
             $cliente -> save();
+            
+            return json_encode($cliente);
         }
 
-        return redirect()->route('cliente.index');
+        return response("Cliente não encontrado!", 404);
     }
 
     public function destroy($id){
         $cliente = Cliente::find($id);
-        $cliente->delete();
 
-        return redirect()->route('cliente.index');
+        if(isset($cliente)){
+            $cliente->delete();  
+            return response("OK!", 200);
+        }
+        return response("Cliente não encontrado!", 404);
     }
 }

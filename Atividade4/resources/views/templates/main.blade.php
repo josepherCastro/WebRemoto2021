@@ -50,4 +50,6 @@
         <b>&copy;2021 - Josepher Castro.</b>
     </footer>
     <script src="{{asset('js/app.js')}}" type="text/javascript"></script>
+
+    @yield('script')
 </html>

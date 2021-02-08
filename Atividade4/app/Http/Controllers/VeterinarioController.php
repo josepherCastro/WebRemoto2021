@@ -9,62 +9,57 @@ use App\Especialidade as Especialidade;
 class VeterinarioController extends Controller{
    
     public function index(){
+        $especialidade = Especialidade::all();
         $veterinario = Veterinario::all();
 
-        return view('veterinario.index', compact(['veterinario']));
+        return view('veterinario.index', compact(['veterinario' , 'especialidade']));
     }
     
-    public function create(){
-        $especialidade = Especialidade::all();
-
-        return view('veterinario.create', compact('especialidade'));
-    }
+    public function create(){ }
 
     public function store(Request $request){
-        Veterinario::create([
-            'nome' => $request->nome,
-            'crmv' => $request->crmv,
-            'especialidade_id' => $request->especialidade
-        ]);
+        $veterinario = new Veterinario();
+        $veterinario -> nome = mb_strtoupper($request->input('nome'),'UTF-8');
+        $veterinario -> crmv = $request -> input('crmv');
+        $veterinario -> especialidade_id = $request -> input('especialidade');
+        $veterinario -> save();
 
-
-        return redirect()->route('veterinario.index');
+        return json_encode($veterinario);
     }
 
     public function show($id){
-        $veterinario = Veterinario::find($id);
+        $veterinario = Veterinario::with('especialidade')->find($id);
 
-        return view('veterinario.show')->with('veterinario', $veterinario);
+        if(isset($veterinario)){
+            return json_encode($veterinario);
+        }
+
+        return response('Veterinario não encontrado', 404);
     }
 
-    public function edit($id){
-        $dados = Veterinario::find($id);
-        $especialidade = Especialidade::all();
-
-        return view('veterinario.edit', ['dados' => $dados, 'especialidade' => $especialidade]);
-    }
+    public function edit($id){ }
 
     public function update(Request $request, $id){
         $veterinario = Veterinario::find($id);
 
-        $veterinario->fill([
-
-            'nome' => $request->nome,
-            'crmv' => $request->crmv,
-            'especialidade_id' => $request->especialidade
-        ]);
-
-
-        $veterinario->save();
-
-        return redirect()->route('veterinario.index');
+        if(isset($veterinario)){
+            $veterinario -> nome = mb_strtoupper($request->input('nome'),'UTF-8');
+            $veterinario -> crmv = $request -> input('crmv');
+            $veterinario -> especialidade_id = $request -> input('especialidade');
+            $veterinario -> save();
+            
+            return json_encode($veterinario);
+        }
+        return response("Veterinario não encontrado!", 404);
     }
 
     public function destroy($id){
         $veterinario = veterinario::find($id);
 
-        $veterinario->delete();
-
-        return redirect()->route('veterinario.index');
+        if(isset($veterinario)){
+            $veterinario -> delete();
+            return response("OK", 200);
+        }
+        return response('Cliente não encontrado', 404);
     }
 }
