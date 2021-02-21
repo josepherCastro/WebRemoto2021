@@ -104,6 +104,7 @@
             $('#id').val('');
             $('#nome').val('');
             $('#curso').removeAttr('selected');
+            $('#disciplina').removeAttr('selected');
             $('#modalAluno').modal('show');
         }
 
@@ -219,10 +220,18 @@
                     "<td>" + aluno.nome + "</td>" +
                     "<td>" + aluno.email + "</td>" +
                     "<td>" + aluno.curso.nome + "</td>" +
+                    "<td>"+
+                       "<select class='form-control'>"+
+                           "@foreach($item->disciplina as $disciplina)" +
+                                "<option>{{$disciplina->nome}}</option>" +
+                            "@endforeach" +
+                        "</select>" +
+                    "</td>" +
                     "<td>" +   
                         "<a class='btn' nohref style='cursor:pointer' onCLick='visualizar("+ aluno.id +")'><i class='fa fa-question'></i></a>" +
                         "<a class='btn' nohref style='cursor:pointer' onCLick='editar("+ aluno.id +")'><i class='fa fa-pencil-square-o'></i></a>" + 
                         "<a class='btn' nohref style='cursor:pointer' onCLick='remover("+ aluno.id +")'><i class='fa fa-trash-o'></i></a>" +
+                        "<a href='{{route('matricula.show', $item->id)}})}}' style='cursor: pointer'><i class='fa fa-times'></i></a>" +
                     "</td>" +
                 "</tr>";
 

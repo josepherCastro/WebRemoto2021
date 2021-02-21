@@ -16,6 +16,14 @@
                     <td>{{ $item->email }}</td>
                     <td>{{ $item->curso->nome }}</td>
 
+                    <td>
+                        <select class="form-control">
+                            @foreach($item->disciplina as $disciplina)
+                                <option>{{$disciplina->nome}}</option>
+                            @endforeach
+                        </select>
+                    </td>
+
                     <td  class="text-center d-flex align-items-center justify-content-center">
                         <a class="btn"nohref style="cursor:pointer" onCLick="visualizar('{{ $item['id'] }}')">
                             <i class="fa fa-question"></i>
@@ -26,6 +34,7 @@
                         <a class="btn" nohref style="cursor:pointer" onCLick="remover('{{ $item['id'] }}' , '{{ $item['nome'] }}')">
                             <i class="fa fa-trash-o"></i>
                         </a>
+                        <a href="{{route('matricula.show', $item->id)}}" style='cursor: pointer'><img src="{{ asset('img/icons/config.svg') }}" class='icon'></a>
                         <form action="{{ route('aluno.destroy', $item['id']) }}" method="POST" name="form_{{$item['id']}}">
                             @csrf
                             @method('DELETE')

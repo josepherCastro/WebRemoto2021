@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Matricula extends Model
 {
     public function aluno(){
-        return $this->belongsToMany('\App\Aluno');
+        return $this->belongsTo('\App\Aluno');
     }
 
     public function disciplina(){
-        return $this->belongsToMany('\App\Disciplina');
+        return $this->belongsTo('\App\Disciplina');
     }
 }

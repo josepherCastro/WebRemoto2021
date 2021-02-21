@@ -36,13 +36,6 @@
                     </li>
                 </ul>
                 <ul class="navbar-nav">
-                    <li @if($tag=="MAT") class="nav-item active" @else class="nav-item " @endif>
-                        <a class="nav-link" href="{{ route('matricula.index') }}">    
-                            <b>Matricula</b>
-                        </a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav">
                     <li @if($tag=="CUR") class="nav-item active" @else class="nav-item " @endif>
                         <a class="nav-link" href="{{ route('curso.index') }}">    
                             <b>Curso</b>
