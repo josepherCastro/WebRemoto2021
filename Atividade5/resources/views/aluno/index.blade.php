@@ -126,15 +126,6 @@
             $('#modalRemove').modal('show');
         }
 
-        function visualizar(id){
-            $('#modalInfo').modal().find('.modal-body').html("");
-            $.getJSON('/api/aluno/'+ id, function(data){
-                $('#modalInfo').modal().find('.modal-body').append("<b>ID:</b> " + data.id + "<br></br>");
-                $('#modalInfo').modal().find('.modal-body').append("<b>NOME:</b> " + data.nome + "<br></br>");
-                $('#modalInfo').modal().find('.modal-body').append("<b>E-MAIL:</b> " + data.email + "<br></br>");
-                $("#modalInfo").modal().find('.modal-body').append("<b>CURSO:</b> " + data.curso.nome + "<br><br>");
-            });
-        }
 
         $("#formAluno").submit( function(event){
             event.preventDefault();
