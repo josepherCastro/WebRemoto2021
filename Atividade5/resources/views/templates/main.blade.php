@@ -15,16 +15,9 @@
             <a href="#" class="navbar-brand"><b>Sistema de Avaliação Remota</b></a>
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav">
-                    <li @if($tag=="ALU") class="nav-item active" @else class="nav-item " @endif>
-                        <a class="nav-link" href="{{ route('aluno.index') }}">    
-                            <b>Aluno</b>
-                        </a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav">
-                    <li @if($tag=="PROF") class="nav-item active" @else class="nav-item " @endif>
-                        <a class="nav-link" href="{{ route('professor.index') }}">    
-                            <b>Professor</b>
+                    <li @if($tag=="CUR") class="nav-item active" @else class="nav-item " @endif>
+                        <a class="nav-link" href="{{ route('curso.index') }}">    
+                            <b>Curso</b>
                         </a>
                     </li>
                 </ul>
@@ -36,9 +29,16 @@
                     </li>
                 </ul>
                 <ul class="navbar-nav">
-                    <li @if($tag=="CUR") class="nav-item active" @else class="nav-item " @endif>
-                        <a class="nav-link" href="{{ route('curso.index') }}">    
-                            <b>Curso</b>
+                    <li @if($tag=="PROF") class="nav-item active" @else class="nav-item " @endif>
+                        <a class="nav-link" href="{{ route('professor.index') }}">    
+                            <b>Professor</b>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li @if($tag=="ALU") class="nav-item active" @else class="nav-item " @endif>
+                        <a class="nav-link" href="{{ route('aluno.index') }}">    
+                            <b>Aluno</b>
                         </a>
                     </li>
                 </ul>
